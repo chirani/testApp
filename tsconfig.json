@@ -1,0 +1,30 @@
+{
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  "compilerOptions": {
+    "isolatedModules": false,
+    "baseUrl": "./src/",
+    "paths": {
+      "@components/*": [
+        "components/*"
+      ],
+      "@screens/*": [
+        "screens/*"
+      ],
+      "@containers/*": [
+        "containers/*"
+      ],
+      "@spbase/*": [
+        "supabase/*"
+      ],
+      "@query/*": [
+        "query/*"
+      ],
+      "@zustand/*":[
+        "zustand/*"
+      ]
+    }
+  },
+  "typeRoots": [
+    "./src/types"
+  ],
+}
