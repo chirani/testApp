@@ -7,7 +7,7 @@ import {useSignin} from '@query/auth';
 const SignInScreen = ({navigation}: any) => {
   const {handleSubmit, control} = useForm();
   const {mutate: signIn, isLoading} = useSignin();
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: Record<string, string>) => {
     const {email, password} = data;
     signIn({email, password});
   };
@@ -32,12 +32,11 @@ const SignInScreen = ({navigation}: any) => {
       <Pressable
         style={{alignSelf: 'flex-end'}}
         onPress={() => {
-          console.log('Whoop');
           navigation.navigate('SignUpScreen');
         }}>
         <Text style={styles.accessory}>
           You already have an account?
-          <Text style={{color: 'teal'}}> Sign in here</Text>
+          <Text style={{color: '#be2ed6'}}> Sign in here</Text>
         </Text>
       </Pressable>
       {isLoading && (
@@ -48,6 +47,7 @@ const SignInScreen = ({navigation}: any) => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     padding: 16,
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 16,
-    backgroundColor: 'teal',
+    backgroundColor: '#be2ed6',
     padding: 16,
     alignSelf: 'stretch',
     justifyContent: 'center',

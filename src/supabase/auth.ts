@@ -17,7 +17,7 @@ const signOut = async () =>
     .catch(err => err);
 
 const signIn = async (email: string, password: string) => {
-  return await supabase.auth.signInWithPassword({
+  return supabase.auth.signInWithPassword({
     email,
     password,
   });
@@ -33,9 +33,12 @@ const updateProfile = async (
     .update({username, full_name})
     .eq('id', userId);
 
-const getSession = async (setting: any) => {
+const updateSession = async (refresh_token: string) =>
+  supabase.auth.refreshSession({refresh_token});
+
+const getSessionStorage = async (setting: any) => {
   try {
-    const value = (await AsyncStorage.getItem('session')) ?? '';
+    const value = (await AsyncStorage.getItem('Session')) ?? '';
     const parsedValue = await JSON.parse(value);
     setting(parsedValue);
     if (value !== null) {
@@ -45,11 +48,12 @@ const getSession = async (setting: any) => {
     // error reading value
   }
 };
-const setSession = async (value: any) => {
+
+const setSessionStorage = async (value: any) => {
   try {
     const jsonValue = JSON.stringify(value);
-    console.log('setter value', value);
-    await AsyncStorage.setItem('session', jsonValue);
+
+    await AsyncStorage.setItem('Session', jsonValue);
   } catch (e) {
     // saving error
   }
@@ -59,7 +63,8 @@ export {
   signUpWithEmail,
   signOut,
   signIn,
+  setSessionStorage,
   updateProfile,
-  setSession,
-  getSession,
+  getSessionStorage,
+  updateSession,
 };

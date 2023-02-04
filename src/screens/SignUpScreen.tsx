@@ -1,4 +1,4 @@
-import {View, Text, Pressable, Alert, StyleSheet} from 'react-native';
+import {View, Text, Pressable, StyleSheet} from 'react-native';
 import React from 'react';
 import Input from '@components/Input';
 import {useForm} from 'react-hook-form';
@@ -6,7 +6,7 @@ import {useSignUpWithEmail} from '@query/auth';
 
 const SignUpScreen = ({navigation}: any) => {
   const {handleSubmit, control} = useForm();
-  const {mutate: signUp, data: signUpData, isSuccess} = useSignUpWithEmail();
+  const {mutate: signUp} = useSignUpWithEmail();
   const onSubmit = async (data: any) => {
     const {email, password} = data;
 
@@ -43,7 +43,7 @@ const SignUpScreen = ({navigation}: any) => {
             navigation.navigate('SignInScreen');
           }}>
           You already have an account?
-          <Text style={{color: 'teal'}}> Sign in here</Text>
+          <Text style={{color: '#be2ed6'}}> Sign in here</Text>
         </Text>
       </Pressable>
     </View>
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 16,
-    backgroundColor: 'teal',
+    backgroundColor: '#be2ed6',
     padding: 16,
     alignSelf: 'stretch',
     justifyContent: 'center',

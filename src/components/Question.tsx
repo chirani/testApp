@@ -68,9 +68,7 @@ const Question = () => {
         <Pressable
           style={styles.button}
           android_ripple={{color: '#fff6'}}
-          onPress={() => {
-            console.log('hey');
-          }}>
+          onPress={() => {}}>
           <Text style={styles.buttonText}>Next</Text>
         </Pressable>
       </View>
@@ -81,7 +79,7 @@ const screenWidth = Dimensions.get('screen').width;
 const styles = StyleSheet.create({
   container: {margin: 16, flex: 1},
   question: {fontSize: 22, color: '#101022', paddingVertical: 12},
-  questionNumber: {color: 'teal'},
+  questionNumber: {color: '#be2ed6'},
   flatListStyle: {
     justifyContent: 'space-evenly',
   },
@@ -116,7 +114,7 @@ const styles = StyleSheet.create({
   button: {
     padding: 16,
     paddingHorizontal: 32,
-    backgroundColor: 'teal',
+    backgroundColor: '#be2ed6',
     borderRadius: 4,
     flex: 1,
     alignItems: 'center',

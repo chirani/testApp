@@ -8,7 +8,8 @@ const supabaseKey = SUPABASE_API_KEY;
 
 const supabase = createClient(supabaseUrl, supabaseKey, {
   auth: {
-    storage: AsyncStorage,
+    storage: AsyncStorage as any,
+    storageKey: 'Session',
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: false,
