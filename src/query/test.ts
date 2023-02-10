@@ -3,6 +3,10 @@ import {
   createTest,
   fetchUserTests,
   fetchTestItems,
+  fetchTestItemsByKey,
+  postTestAnswer,
+  getCurrentAnswer,
+  deleteAnswer,
 } from '@spbase/test';
 import {useMutation, useQuery} from 'react-query';
 import {queryClient} from '../../App';
@@ -47,8 +51,39 @@ const useCreateTestItem = () =>
 const useFetchUserTests = ({user_id}: Record<string, string>) =>
   useQuery('fetchUserTests', () => fetchUserTests(user_id));
 
-const useFetchTestItems = ({test_id}: Record<string, string>) => {
-  return useQuery('fetchTestItems', async () => fetchTestItems(test_id));
-};
+const useFetchTestItems = ({test_id}: Record<string, string>) =>
+  useQuery('fetchTestItems', async () => fetchTestItems(test_id));
 
-export {useCreateTest, useCreateTestItem, useFetchTestItems, useFetchUserTests};
+const useFetchTestItemsByKey = () =>
+  useMutation('fetchTestItems', async ({test_key}: Record<string, string>) =>
+    fetchTestItemsByKey(test_key),
+  );
+const usePostTestAnswer = () =>
+  useMutation(
+    'postTestAnswer',
+    async ({test_id, test_item_id, answer, answer_index}: any) => {
+      const {data} = await getCurrentAnswer(test_item_id);
+      if (!data) {
+        return postTestAnswer(test_id, test_item_id, answer, answer_index);
+      } else {
+        return await deleteAnswer(test_item_id).then(() =>
+          postTestAnswer(test_id, test_item_id, answer, answer_index),
+        );
+      }
+    },
+  );
+const useGetCurrentAnswer = (test_item_id: string) =>
+  useQuery(
+    'getCurrentAnswer_' + test_item_id,
+    async () => await getCurrentAnswer(test_item_id),
+  );
+
+export {
+  usePostTestAnswer,
+  useGetCurrentAnswer,
+  useCreateTest,
+  useCreateTestItem,
+  useFetchTestItems,
+  useFetchUserTests,
+  useFetchTestItemsByKey,
+};

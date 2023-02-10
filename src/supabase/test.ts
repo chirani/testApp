@@ -23,4 +23,37 @@ const fetchUserTests = async (user_id: string) =>
 const fetchTestItems = async (test_id: string) =>
   await supabase.from('test_items').select().eq('test_id', test_id);
 
-export {createTest, createTestItem, fetchUserTests, fetchTestItems};
+const fetchTestByKey = async (test_key: string) =>
+  await supabase.from('tests').select().eq('test_key', test_key).maybeSingle();
+
+const fetchTestItemsByKey = async (test_key: string) =>
+  fetchTestByKey(test_key).then(res => fetchTestItems(res?.data?.id));
+
+const postTestAnswer = async (
+  test_id: number,
+  test_item_id: string,
+  answer: string,
+  answer_index: number,
+) =>
+  await supabase
+    .from('test_answers')
+    .insert({test_id, test_item_id, answer, answer_index})
+    .then(res => res);
+
+const deleteAnswer = async (test_item_id: string) =>
+  await supabase.from('test_answers').delete().eq('test_item_id', test_item_id);
+
+const getCurrentAnswer = async (test_item_id: string) =>
+  await supabase.from('test_answers').select().eq('test_item_id', test_item_id);
+
+export {
+  deleteAnswer,
+  createTest,
+  createTestItem,
+  fetchUserTests,
+  fetchTestItems,
+  fetchTestByKey,
+  fetchTestItemsByKey,
+  postTestAnswer,
+  getCurrentAnswer,
+};

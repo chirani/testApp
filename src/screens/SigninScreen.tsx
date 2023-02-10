@@ -1,4 +1,4 @@
-import {View, Text, Pressable, StyleSheet} from 'react-native';
+import {View, Text, Pressable, StyleSheet, Dimensions} from 'react-native';
 import React from 'react';
 import Input from '@components/Input';
 import {useForm} from 'react-hook-form';
@@ -35,8 +35,8 @@ const SignInScreen = ({navigation}: any) => {
           navigation.navigate('SignUpScreen');
         }}>
         <Text style={styles.accessory}>
-          You already have an account?
-          <Text style={{color: '#be2ed6'}}> Sign in here</Text>
+          Don't have an account?
+          <Text style={{color: '#be2ed6'}}> Sign up here</Text>
         </Text>
       </Pressable>
       {isLoading && (

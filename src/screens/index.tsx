@@ -7,15 +7,16 @@ import useAuthStore from '../zustand/store';
 import CreateTestScreen from './CreateTestScreen';
 import TestScreen from './TestScreen';
 import {logCurrentStorage} from '@query/storage';
-import TakeTestScreen from './TakeTestScreen';
+import PickTestScreen from './PickTestScreen';
 import {getSessionStorage} from '@spbase/auth';
+import TestQuestions from './TestQuestions';
 
 const Stack = createNativeStackNavigator();
 
 const StackNav = () => {
   const {session, setSession} = useAuthStore();
   React.useEffect(() => {
-    if (session === null) {
+    if (!session) {
       getSessionStorage(setSession);
     }
   }, []);
@@ -42,7 +43,8 @@ const StackNav = () => {
       />
       <Stack.Screen name="CreateTestScreen" component={CreateTestScreen} />
       <Stack.Screen name="TestScreen" component={TestScreen} />
-      <Stack.Screen name="TakeTestScreen" component={TakeTestScreen} />
+      <Stack.Screen name="PickTestScreen" component={PickTestScreen} />
+      <Stack.Screen name="TestQuestions" component={TestQuestions} />
     </Stack.Navigator>
   );
 };

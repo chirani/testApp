@@ -8,11 +8,9 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-
 import {useForm} from 'react-hook-form';
 import Input from '@components/Input';
 import {useCreateTestItem, useFetchTestItems} from '@query/test';
-import supabase from '@spbase/index';
 
 const TestScreen = ({route}: any) => {
   const [formVisible, setFormVisible] = useState(false);
@@ -47,7 +45,7 @@ const TestScreen = ({route}: any) => {
           onPress={() => {
             setFormVisible(true);
           }}>
-          <Text style={styles.buttonText}>A Question to this Test</Text>
+          <Text style={styles.buttonText}>Add Question to this Test</Text>
         </Pressable>
       </View>
       {formVisible && (
@@ -63,7 +61,7 @@ const CreateTestItemForm = (props: any) => {
     'test_choice_2',
   ]);
 
-  const {mutate: createATestItem, error: createTestData} = useCreateTestItem();
+  const {mutate: createATestItem} = useCreateTestItem();
 
   const {handleSubmit, control} = useForm();
   const addChoice = () => {
@@ -94,6 +92,7 @@ const CreateTestItemForm = (props: any) => {
       <Text style={styles.label}>Test Choices</Text>
       {numberOfChoices.map((choice: string, index: number) => (
         <Input
+          key={index}
           name={choice}
           control={control}
           style={styles.input}

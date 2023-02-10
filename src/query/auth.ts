@@ -32,7 +32,7 @@ const useSignOut = () => {
   const authStore = useAuthStore();
   return useMutation(async () => signOut(), {
     onSuccess: () => {
-      //setSessionStorage(null);
+      setSessionStorage(null);
       getSessionStorage(authStore.setSession);
     },
   });

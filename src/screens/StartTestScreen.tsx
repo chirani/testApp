@@ -22,7 +22,7 @@ const StartTestScreen = ({navigation}: any) => {
       </Pressable>
       <Pressable
         style={styles.startTestButton}
-        onPress={() => navigation.navigate('TakeTestScreen')}>
+        onPress={() => navigation.navigate('PickTestScreen')}>
         <Text style={styles.startTestButtonText}>Start Taking A test</Text>
       </Pressable>
       <TouchableHighlight

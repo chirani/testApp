@@ -3,16 +3,18 @@ import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Input from '@components/Input';
 import {useForm} from 'react-hook-form';
-import Test from '@components/Test';
 
-const TakeTestScreen = () => {
+const TakeTestScreen = ({navigation}: any) => {
   const {handleSubmit, control} = useForm();
+  const onSubmit = async (data: Record<string, string>) => {
+    navigation.navigate('TestQuestions', {test_key: data.test_key});
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={[styles.container, {padding: 16, paddingTop: 40}]}>
         <Text>Enter Test Key To Take The Test:</Text>
         <Input control={control} name="test_key" style={styles.input} />
-        <Pressable style={styles.button}>
+        <Pressable style={styles.button} onPress={handleSubmit(onSubmit)}>
           <Text style={styles.buttonText}>Start Test</Text>
         </Pressable>
       </View>
